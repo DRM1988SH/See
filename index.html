@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizons d'Avenir - Opportunités pour Réfugiés</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Disclaimer Bar -->
+    <div class="disclaimer-bar">
+        <span>⚠️ Nous ne soutenons pas l'immigration illégale - We do not support illegal immigration - نحن لا ندعم الهجرة غير الشرعية</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand"><i class="fas fa-globe-europe"></i><span data-i18n="brand">Horizons d'Avenir</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" data-i18n="nav.home">Accueil</a></li>
+            <li><a href="#jobs" data-i18n="nav.jobs">Emplois</a></li>
+            <li><a href="#training" data-i18n="nav.training">Formations</a></li>
+            <li><a href="#videos" data-i18n="nav.videos">Vidéos</a></li>
+            <li><a href="#posters" data-i18n="nav.posters">Affiches</a></li>
+            <li><a href="#legal" data-i18n="nav.legal">Droit</a></li>
+            <li><a href="#admin" class="admin-only hidden" data-i18n="nav.admin">Admin</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="langSwitch"><option value="fr">🇫🇷 FR</option><option value="en">🇬🇧 EN</option><option value="ar">🇸🇦 AR</option></select>
+            <button class="btn-outline" id="btnLogin"><i class="fas fa-sign-in-alt"></i> <span data-i18n="login">Connexion</span></button>
+            <button class="btn-primary" id="btnRegister"><i class="fas fa-user-plus"></i> <span data-i18n="register">Inscription</span></button>
+            <button class="btn-outline hidden" id="btnLogout"><i class="fas fa-sign-out-alt"></i> <span data-i18n="logout">Déconnexion</span></button>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main id="app">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <h1 data-i18n="home.title">Bienvenue sur Horizons d'Avenir</h1>
+            <p data-i18n="home.sub">Plateforme d'insertion pro pour réfugiés en France</p>
+            <div class="cards-3">
+                <div class="card"><i class="fas fa-briefcase"></i><h3 data-i18n="home.card1">Emplois</h3><p data-i18n="home.card1d">Offres dans votre ville</p></div>
+                <div class="card"><i class="fas fa-graduation-cap"></i><h3 data-i18n="home.card2">Formations</h3><p data-i18n="home.card2d">Coursera, LinkedIn</p></div>
+                <div class="card"><i class="fas fa-balance-scale"></i><h3 data-i18n="home.card3">Droits</h3><p data-i18n="home.card3d">Vos droits en France</p></div>
+            </div>
+        </section>
+
+        <!-- Register Section -->
+        <section id="register-sec" class="section hidden">
+            <h2 data-i18n="reg.title">Créer votre compte</h2>
+            <div class="social-login">
+                <button class="btn-google" id="googleSignup"><i class="fab fa-google"></i> Google</button>
+                <button class="btn-facebook" id="facebookSignup"><i class="fab fa-facebook-f"></i> Facebook</button>
+                <button class="btn-phone" id="phoneSignup"><i class="fas fa-mobile-alt"></i> +33 Téléphone</button>
+            </div>
+            <div class="or-divider"><span data-i18n="reg.or">ou par email</span></div>
+            <form id="emailRegister" class="form-box">
+                <input type="text" id="regName" data-i18n-placeholder="reg.name" placeholder="Nom complet" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="password" id="regPass" data-i18n-placeholder="reg.pass" placeholder="Mot de passe" required>
+                <button type="submit" class="btn-primary" data-i18n="reg.btn">S'inscrire</button>
+            </form>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile-sec" class="section hidden">
+            <h2 data-i18n="prof.title">Compléter votre profil</h2>
+            <form id="profileForm" class="form-box">
+                <select id="profStatus" required><option value="">Statut</option><option value="jobseeker">Chercheur d'emploi</option><option value="trainee">Stagiaire</option><option value="volunteer">Bénévole</option></select>
+                <select id="profCity" required><option value="">Ville</option><option>Paris</option><option>Lyon</option><option>Marseille</option><option>Lille</option></select>
+                <select id="profLegal"><option value="">Situation (confidentiel)</option><option>Demandeur d'asile</option><option>Réfugié</option><option>Sans papiers</option></select>
+                <button type="submit" class="btn-primary" data-i18n="prof.save">Enregistrer</button>
+            </form>
+        </section>
+
+        <!-- Jobs Section -->
+        <section id="jobs" class="section">
+            <h2 data-i18n="jobs.title">Offres d'Emploi</h2>
+            <div class="filters">
+                <input type="text" id="jobSearch" data-i18n-placeholder="jobs.search" placeholder="Rechercher...">
+                <select id="jobCity"><option value="">Toutes villes</option></select>
+                <select id="jobContract"><option value="">Tous contrats</option><option>CDI</option><option>CDD</option></select>
+            </div>
+            <div id="jobsList" class="jobs-grid"></div>
+        </section>
+
+        <!-- Training Section -->
+        <section id="training" class="section">
+            <h2 data-i18n="train.title">Formations</h2>
+            <div class="cards-3">
+                <a href="https://coursera.org/refugees" target="_blank" class="card"><i class="fas fa-university"></i><h3>Coursera</h3><p data-i18n="train.c">Cours gratuits</p></a>
+                <a href="https://linkedin.com/learning" target="_blank" class="card"><i class="fab fa-linkedin"></i><h3>LinkedIn</h3><p data-i18n="train.l">Compétences pro</p></a>
+                <a href="https://pole-emploi.fr" target="_blank" class="card"><i class="fas fa-building"></i><h3>Pôle Emploi</h3><p data-i18n="train.p">Formations France</p></a>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="section">
+            <h2 data-i18n="vid.title">Vidéos Éducatives</h2>
+            <div id="videosList" class="cards-3"></div>
+        </section>
+
+        <!-- Posters Section -->
+        <section id="posters" class="section">
+            <h2 data-i18n="post.title">Affiches Informatives</h2>
+            <div id="postersList" class="cards-3"></div>
+        </section>
+
+        <!-- Legal Section -->
+        <section id="legal" class="section">
+            <h2 data-i18n="legal.title">Cadre Juridique</h2>
+            <div class="cards-3">
+                <a href="https://legifrance.gouv.fr" target="_blank" class="card"><h3>🇫🇷 Loi Immigration</h3><p>CESEDA</p></a>
+                <a href="https://home-affairs.ec.europa.eu" target="_blank" class="card"><h3>🇪🇺 Politique UE</h3><p>CEAS</p></a>
+                <a href="https://unhcr.org/fr" target="_blank" class="card"><h3>🌍 Convention Genève</h3><p>1951</p></a>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="section hidden">
+            <h2>🔧 Administration</h2>
+            <div class="admin-panel">
+                <div class="admin-tabs">
+                    <button class="active" data-atab="dashboard">Tableau</button>
+                    <button data-atab="users">Utilisateurs</button>
+                    <button data-atab="jobs-admin">Offres</button>
+                    <button data-atab="videos-admin">Vidéos</button>
+                    <button data-atab="posters-admin">Affiches</button>
+                    <button data-atab="admins">Admins</button>
+                </div>
+                <div id="adminContent"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div><h4>Horizons d'Avenir</h4><p>📍 Paris, France</p><p>📞 +33 1 23 45 67 89</p></div>
+            <div><h4 data-i18n="footer.links">Liens</h4><a href="#jobs">Emplois</a><a href="#training">Formations</a></div>
+            <div><h4 data-i18n="footer.legal">Légal</h4><a href="#">Mentions</a><a href="#">RGPD</a></div>
+        </div>
+        <p>© 2024 - Conforme RGPD - France</p>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
